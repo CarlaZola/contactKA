@@ -7,7 +7,7 @@ import { ContactProvider } from '../context/ContactContext';
 
 
 export const RoutesMain = () => {
-     return (
+    return (
         <Routes>
             <Route path='/' element={<LoginPage />} />
             <Route path='register' element={<RegisterPage />} />
