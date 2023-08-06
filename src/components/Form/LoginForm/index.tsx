@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-misused-promises */
@@ -19,8 +20,7 @@ const LoginForm = () => {
     const { userLogin } = useContext(UserContext)
 
     const submit:SubmitHandler<TUserLogin> = (data) => {
-        console.log(data)
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+       
         userLogin(data)
         reset()
     }
