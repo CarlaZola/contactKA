@@ -33,7 +33,7 @@ const UpdateUserForm = () => {
     })
 
     const submitUpdateContact: SubmitHandler<TContactUpdate> = (data) => {
-        console.log(editUser.id)
+
         const oldValues = {
             full_name: editUser?.full_name,
             phone: editUser?.phone,
@@ -54,7 +54,7 @@ const UpdateUserForm = () => {
             setEditUser(null);
 
         }else{
-            userUpdate(result, editUser.id)
+            userUpdate(result, +(id))
         }
          
     }

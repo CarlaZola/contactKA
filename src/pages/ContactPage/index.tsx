@@ -16,8 +16,8 @@ import ModalUserDelete from "../../components/Modal/ModalUserDelete"
 
 const ContactPage = () => {
 
-    const { user, setUser, setEditUser, deleteUser } = useContext(UserContext)
-    const { isOpen, setIsOpen, editingContact, deletingContact, setOpenDetails , openDetails, getContactsDetails} = useContext(ContactContext)
+    const { user, setUser, setEditUser, deleteUser, editUser } = useContext(UserContext)
+    const { isOpen, setIsOpen, editingContact, deletingContact, setOpenDetails , getContactsDetails} = useContext(ContactContext)
 
     const navigate = useNavigate()
 
@@ -57,7 +57,7 @@ const ContactPage = () => {
     
             {deletingContact ? <ModalDelete /> : null} 
 
-            {openDetails ? <ModalReport /> : null}
+            {editUser ? <ModalReport /> : null}
 
             {deleteUser ? <ModalUserDelete /> : null}
     
