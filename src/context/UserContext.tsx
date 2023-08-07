@@ -194,6 +194,7 @@ export const UserProvider = ({children}: IDefaultProviderProps) => {
           });
           
           setUser(null);
+          navigate(`/`)
           
           return response;
         } catch (error) {
