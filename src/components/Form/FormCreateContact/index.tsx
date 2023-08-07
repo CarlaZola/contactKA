@@ -33,7 +33,7 @@ const FormCreateTech = () => {
     const submitNewContact: SubmitHandler<TContactForm>= (data) => {
         const contact = {
             ...data,
-            userId: id!.toString()
+            userId: +(id!)
         } 
         contactsCreate(contact)
         reset()
@@ -41,42 +41,46 @@ const FormCreateTech = () => {
     };
     return (
         <StyledFormCreateContact onSubmit={handleSubmit(submitNewContact)}>
-        <Input
-            id="full_name"
-            label="Nome"
-            type="text"
-            placeholder="nome do contato"
-            register={register("full_name")}
-            error={errors.full_name}
-        />
+        <div>
+            <Input
+                id="full_name"
+                label="Nome"
+                type="text"
+                placeholder="nome do contato"
+                register={register("full_name")}
+                error={errors.full_name}
+            />
 
-        <Input
-            id="email"
-            label="Email"
-            type="text"
-            register={register("email")}
-            error={errors.email}
-        />
+            <Input
+                id="email"
+                label="Email"
+                type="text"
+                register={register("email")}
+                error={errors.email}
+            />
 
-        <TextMaskCustom
-            id="celular"
-            label="Celular"
-            type="text"
-            register={register("phone")}
-            error={errors.phone}
-        />
+        </div>
+        <div>    
+            <TextMaskCustom
+                    id="celular"
+                    label="Celular"
+                    type="text"
+                    register={register("phone")}
+                    error={errors.phone}
+                />
 
-        <Input
-            id="nickname"
-            label="Apelido"
-            type="text"
-            register={register("nickname")}
-            error={errors.nickname}
-        />
-
-        <Button className="btnCadaster" type="submit">
-            {loading ? <img src={spinner} className="loading" color="black"/> : "Criar Contato"}
-        </Button>
+                <Input
+                    id="nickname"
+                    label="Apelido"
+                    type="text"
+                    register={register("nickname")}
+                    error={errors.nickname}
+                />
+            <Button className="btnCadaster" type="submit">
+                {loading ? <img src={spinner} className="loading" color="black"/> : "Criar Contato"}
+            </Button>
+       </div>
+      
         </StyledFormCreateContact>
     );
 };

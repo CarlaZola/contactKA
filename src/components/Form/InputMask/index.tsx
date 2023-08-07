@@ -1,6 +1,7 @@
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 import { InputHTMLAttributes } from 'react';
 import InputMask from 'react-input-mask';
+import StyledFieldset from '../Input/style';
 
 
 interface InputMaskProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -14,7 +15,7 @@ interface InputMaskProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const TextMaskCustom = ({type, label, error, register, id}: InputMaskProps) => { 
   return (
-    <fieldset>
+    <StyledFieldset>
       <label htmlFor={id}>{label}</label>
       <InputMask
         mask="(99) 99999-9999"   
@@ -22,9 +23,9 @@ const TextMaskCustom = ({type, label, error, register, id}: InputMaskProps) => {
         {...register}  
       />
       {error ? (
-      <span>{error.message}</span>
+      <p>{error.message}</p>
       ) : null}
-    </fieldset>
+    </StyledFieldset>
   );
 }
 

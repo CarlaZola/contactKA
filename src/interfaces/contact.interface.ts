@@ -8,7 +8,9 @@ export type TContact = {
 };
 
 export type TContactRequest = Omit<TContact, "id" | "createdAt"> & {
-  userId: string;
+  userId: number;
 };
 
 export type TContactForm = Omit<TContact, "id" | "createdAt">;
+
+export type TContactUpdate = Partial<TContactForm>

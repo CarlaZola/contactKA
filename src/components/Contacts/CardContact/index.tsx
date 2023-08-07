@@ -1,5 +1,5 @@
-// import { useContext } from "react"
-// import { ContactContext } from "../../../context/ContactContext"
+import { useContext } from "react"
+import { ContactContext } from "../../../context/ContactContext"
 import StyledCardContacts from "./CardContact"
 import { TContact } from "../../../interfaces/contact.interface"
 
@@ -9,10 +9,10 @@ export interface IContactProps {
 
 const CardContact = ({cont}: IContactProps) => {
 
-    // const { setEditingTech } = useContext(ContactContext)
+    const { setEditingContact } = useContext(ContactContext)
 
     return(
-        <StyledCardContacts>
+        <StyledCardContacts onClick={() => setEditingContact(cont)}>
             <p>
                 {cont.full_name}
             </p>

@@ -6,6 +6,8 @@ import { Input } from "../Input";
 import { useContext } from "react";
 import { UserContext } from "../../../context/UserContext";
 import {  TextMaskCustom } from "../InputMask";
+import StyledFormRegister from "./registerForm";
+import Button from "../../../styles/button";
 
 const RegisterForm = () => {
 
@@ -18,8 +20,6 @@ const RegisterForm = () => {
     const { userRegister } = useContext(UserContext)
 
     const submit: SubmitHandler<TUserRequest> =  (data) => {
-        console.log(data)
-        
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         userRegister(data)
         reset()
@@ -27,7 +27,7 @@ const RegisterForm = () => {
 
     return (
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        <form onSubmit={handleSubmit(submit)}>
+        <StyledFormRegister onSubmit={handleSubmit(submit)}>
             <Input 
                 type='text'
                 label='Nome'
@@ -72,8 +72,8 @@ const RegisterForm = () => {
                 error={errors.nickname}
                 id="nickname"
             />
-            <button type="submit">Criar Conta</button>
-        </form>
+            <Button type="submit">Criar Conta</Button>
+        </StyledFormRegister>
     )
 }
 

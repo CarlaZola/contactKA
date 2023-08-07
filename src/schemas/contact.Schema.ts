@@ -8,3 +8,10 @@ export const createContact = yup
     nickname: yup.string().optional(),
   })
   .required();
+
+export const updateContact = yup.object({
+  full_name: yup.string().optional(),
+  email: yup.string().optional(),
+  phone: yup.string().optional(),
+  nickname: yup.string().optional(),
+});

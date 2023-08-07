@@ -9,6 +9,8 @@ import { schemaLogin } from "../../../schemas/userSchema"
 import { TUserLogin } from "../../../interfaces/user.interface"
 import { UserContext } from "../../../context/UserContext"
 import { useContext } from "react"
+import Button from "../../../styles/button"
+import StyledLoginForm from "./loginForm"
 
 const LoginForm = () => {
 
@@ -25,7 +27,7 @@ const LoginForm = () => {
         reset()
     }
     return (
-        <form onSubmit={handleSubmit(submit)}>
+        <StyledLoginForm onSubmit={handleSubmit(submit)}>
             <Input
                 type="text"
                 label="Email"
@@ -38,8 +40,8 @@ const LoginForm = () => {
                 register={register("password")}
                 error={errors.password}
             />
-            <button type="submit">Entrar</button>
-        </form>
+            <Button type="submit">Entrar</Button>
+        </StyledLoginForm>
     )
 }
 

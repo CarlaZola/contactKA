@@ -5,6 +5,7 @@ const StyledFormCreateContact = styled.form`
   margin: 0 auto;
   padding-top: 1.5rem;
   padding-bottom: 2rem;
+  display: flex;
 
   .btnCadaster {
     width: 100%;

@@ -19,6 +19,7 @@ const StyledFieldset = styled.fieldset`
     color: var(--color-grey-0);
     padding: 0 0.75rem;
     background-color: var(--color-grey-200);
+    width: 95%;
   }
 
   input:focus {
