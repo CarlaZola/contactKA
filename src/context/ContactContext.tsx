@@ -49,6 +49,7 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
                 },
               });
               setUser(response.data)
+              user
               setContacts(response.data.contacts);
             } catch (error) {
               console.log(error);
