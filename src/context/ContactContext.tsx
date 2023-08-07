@@ -38,7 +38,7 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [openDetails, setOpenDetails ] = useState<boolean | null>(null)
 
-    const {  user, setUser } = useContext(UserContext)
+    const {  setUser } = useContext(UserContext)
     
     useEffect(() => { 
         const id = localStorage.getItem('@id')
