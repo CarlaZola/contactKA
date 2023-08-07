@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-misused-promises */
@@ -8,6 +9,8 @@ import { schemaLogin } from "../../../schemas/userSchema"
 import { TUserLogin } from "../../../interfaces/user.interface"
 import { UserContext } from "../../../context/UserContext"
 import { useContext } from "react"
+import Button from "../../../styles/button"
+import StyledLoginForm from "./loginForm"
 
 const LoginForm = () => {
 
@@ -19,13 +22,12 @@ const LoginForm = () => {
     const { userLogin } = useContext(UserContext)
 
     const submit:SubmitHandler<TUserLogin> = (data) => {
-        console.log(data)
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+       
         userLogin(data)
         reset()
     }
     return (
-        <form onSubmit={handleSubmit(submit)}>
+        <StyledLoginForm onSubmit={handleSubmit(submit)}>
             <Input
                 type="text"
                 label="Email"
@@ -38,8 +40,8 @@ const LoginForm = () => {
                 register={register("password")}
                 error={errors.password}
             />
-            <button type="submit">Entrar</button>
-        </form>
+            <Button type="submit">Entrar</Button>
+        </StyledLoginForm>
     )
 }
 
