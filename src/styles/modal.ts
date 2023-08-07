@@ -99,4 +99,55 @@ const StyledModalDelete = styled.div`
   }
 `;
 
-export { Modal, StyledModalDelete };
+
+const ModalReportStyled = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding-top: 5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  
+
+  .dialog_div {
+    width: 95%;
+    max-width: 23.125rem;
+    margin: 0 auto;
+    background-color: var(--color-grey-300);
+    border-radius: 0.25rem;
+
+
+    .modalHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.25rem 1rem;
+      background-color: var(--color-grey-200);
+      height: 3.125rem;
+      border-radius: 0.25rem 0.25rem 0 0;
+
+    .modalBody{
+      overflow-x: scroll;
+    }
+
+      .btnCloseModal {
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      h2 {
+        font-size: 0.875rem;
+      }
+
+      p {
+        cursor: pointer;
+      }
+    }
+  }
+`;
+
+export { Modal, StyledModalDelete, ModalReportStyled };

@@ -7,8 +7,8 @@ import { createContext, useState, useEffect } from "react";
 
 import { api } from "../services/api";
 import { toast } from "react-toastify";
-import { TUserRequest, TUserResponse } from "../interfaces/user.interface";
-import axios from "axios";
+import { TUserRequest, TUserResponse, TUserUpdate } from "../interfaces/user.interface";
+import axios, { AxiosResponse } from "axios";
 
 export interface IUser {
     token: string,
@@ -40,6 +40,13 @@ interface IUsercontext{
     isLog: boolean 
     setIsLog: (value: React.SetStateAction<boolean>) => void
     setUser: (value: React.SetStateAction<TUserResponse | null>) => void
+    loading: boolean
+    editUser: TUserResponse | null
+    userUpdate: (dataUser: TUserUpdate, idUser: number) => Promise<AxiosResponse<TUserResponse | undefined>>
+    setEditUser: (value: React.SetStateAction<TUserResponse>) => void
+    deleteUser: number | null
+    setDeleteUser:(value: React.SetStateAction<number>) => void
+    userDelete: (idUser: number) => Promise<AxiosResponse<any, any>>
 }
 
 
@@ -50,6 +57,9 @@ export const UserProvider = ({children}: IDefaultProviderProps) => {
     const [user, setUser] = useState<TUserResponse | null>(null)
     const [isLog, setIsLog] = useState(false)
     const navigate = useNavigate()
+    const [loading, setLoading] = useState<boolean>(false);
+    const [editUser, setEditUser] = useState<TUserResponse | null>(null);
+    const [deleteUser, setDeleteUser] = useState<number | null>(null);
     
     useEffect(() => {
         const token = localStorage.getItem('@token')
@@ -96,10 +106,16 @@ export const UserProvider = ({children}: IDefaultProviderProps) => {
                     navigate(`/`);
                 }, 1300);
         }catch(error){     
-            console.log(error)           
+            if(axios.isAxiosError(error)){
+                toast.error(error.message, {
+                    theme: `colored`,
+                    autoClose: 500,
+                    position: "top-right",
+                    hideProgressBar: true,                      
+                })         
         }
     }
-
+}
     const userLogin = async(dataLogin: IUserLoginForm) => {
         try{
             const response = await api.post<IUser>("login", dataLogin)
@@ -131,6 +147,67 @@ export const UserProvider = ({children}: IDefaultProviderProps) => {
         navigate("/")
     }
 
+     const userUpdate = async (dataUser: TUserUpdate, idUser: number) => {
+      setLoading(true);
+      const token = localStorage.getItem("@token");    
+      const instedToken = token.slice(1, -1);
+      try {
+        const response = await api.patch<TUserResponse>(`client/${idUser}`, dataUser, {
+          headers: {
+            Authorization: `Bearer ${instedToken}`,
+          },
+        });
+       const newUser = {...user, ...dataUser}
+        toast.success("Contato alterado com sucesso!", {
+          hideProgressBar: true,
+          autoClose: 1000,
+        });
+        setUser(newUser)
+        return response
+      } catch (error) {
+        if(axios.isAxiosError(error)){
+          toast.error(error.message, {
+              theme: `colored`,
+              autoClose: 500,
+              position: "top-right",
+              hideProgressBar: true,                      
+          })
+      }
+      } finally {
+        setLoading(false);
+        setEditUser(null);
+      }
+    }
+
+    const userDelete = async (idUser: number) => {
+        const token = localStorage.getItem("@token");
+        const instedToken = token.slice(1, -1);
+        try {
+          const response = await api.delete(`client/${idUser}`, {
+            headers: {
+              Authorization: `Bearer ${instedToken}`,
+            },
+          });
+          toast.success("Conta Deletada!", {
+            hideProgressBar: true,
+            autoClose: 1000,
+          });
+          
+          setUser(null);
+          
+          return response;
+        } catch (error) {
+          if(axios.isAxiosError(error)){
+            toast.error(`${error.message}`, {
+                theme: `colored`,
+                autoClose: 500,
+                position: "top-right",
+                hideProgressBar: true,                      
+            })
+          }
+        }
+      };
+
 
     return(
        <UserContext.Provider value={{
@@ -140,7 +217,14 @@ export const UserProvider = ({children}: IDefaultProviderProps) => {
         userLogout,
         isLog,
         setIsLog,
-        setUser
+        setUser,
+        userUpdate,
+        editUser,
+        loading,
+        setEditUser,
+        deleteUser,
+        setDeleteUser,
+        userDelete
        }}>
             {children}
        </UserContext.Provider>

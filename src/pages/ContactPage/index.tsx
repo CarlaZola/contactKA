@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+
 import ListContacts from "../../components/Contacts"
 import ModalCreate from "../../components/Modal/ModalCreate"
 import { ContactContext } from "../../context/ContactContext"
@@ -8,12 +10,14 @@ import { ToastContainer } from "react-toastify"
 import ModalUpdate from "../../components/Modal/ModalUpdate"
 import { useNavigate } from "react-router-dom"
 import ModalDelete from "../../components/Modal/ModalDelete"
-
+import ModalReport from "../../components/Modal/ModalReport"
+import ModalUserDelete from "../../components/Modal/ModalUserDelete"
 
 
 const ContactPage = () => {
-    const { user, setUser } = useContext(UserContext)
-    const { isOpen, setIsOpen, editingContact, deletingContact } = useContext(ContactContext)
+
+    const { user, setUser, setEditUser, deleteUser } = useContext(UserContext)
+    const { isOpen, setIsOpen, editingContact, deletingContact, setOpenDetails , openDetails, getContactsDetails} = useContext(ContactContext)
 
     const navigate = useNavigate()
 
@@ -23,18 +27,25 @@ const ContactPage = () => {
       navigate("/");
     };
 
+     const details = () => {
+        getContactsDetails()
+        setOpenDetails(true) 
+        setEditUser(user)   
+    }
+
     return (
         <Home>
           <ToastContainer />
           <header>
             <div className="boxHeader">
               <h1>ContactKa</h1>
+              <button type="button" onClick={() => details()}>+Detalhes</button>
               <button type="button" onClick={() => exitProfile()}>
                 Sair
               </button>
             </div>
           </header>
-    
+  
           <main>
             <section className="contentProfileInfo">
               <h2>Olá, {user?.full_name}</h2>
@@ -45,6 +56,10 @@ const ContactPage = () => {
             {editingContact ? <ModalUpdate /> : null}
     
             {deletingContact ? <ModalDelete /> : null} 
+
+            {openDetails ? <ModalReport /> : null}
+
+            {deleteUser ? <ModalUserDelete /> : null}
     
             <section className="contentTechs">
               <div className="boxCreateTech">

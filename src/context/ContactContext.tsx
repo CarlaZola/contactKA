@@ -23,6 +23,9 @@ export interface IContactContext {
     deletingContact: number | null
     setDeletingContact: (value: React.SetStateAction<number | null>) => void
     contactsDelete: (idContact: number) => Promise<AxiosResponse<void> | undefined>
+    openDetails: boolean | null
+    setOpenDetails : (value: React.SetStateAction<boolean>) => void
+    getContactsDetails: () => Promise<void>
 }
 
 export const ContactContext = createContext({} as IContactContext)
@@ -33,8 +36,9 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
     const [editingContact, setEditingContact] = useState<TContact | null>(null);
     const [deletingContact, setDeletingContact] = useState<number | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
+    const [openDetails, setOpenDetails ] = useState<boolean | null>(null)
 
-    const {  setUser } = useContext(UserContext)
+    const {  user, setUser } = useContext(UserContext)
     
     useEffect(() => { 
         const id = localStorage.getItem('@id')
@@ -58,7 +62,9 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
           getContacts();
         }
       }, []);
-    
+
+     
+  
     const token = localStorage.getItem("@token");
    
     const contactsCreate = async (dataContact: TContactRequest) => {
@@ -157,6 +163,20 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
       }
     }
 
+    const getContactsDetails = async () => {
+      const instedToken = token.slice(1, -1);
+      try {
+        const response = await api.get<TContact[]>(`contact`, {
+          headers: {
+            Authorization: `Bearer ${instedToken}`,
+          },
+        });
+        setContacts(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     return(
         <ContactContext.Provider value={{
             contact,
@@ -169,7 +189,10 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
             contactsUpdate,
             setDeletingContact,
             deletingContact,
-            contactsDelete
+            contactsDelete,
+            openDetails,
+            setOpenDetails,
+            getContactsDetails
 
         }}>
             {children}

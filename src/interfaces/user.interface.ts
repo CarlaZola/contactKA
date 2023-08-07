@@ -18,7 +18,7 @@ type TUserLogin = {
     password: string
 }
 
-
+type TUserUpdate = Partial<TUserRequest> 
 
 type TUserResponse = {
     id: number;
@@ -37,5 +37,6 @@ type TUserResponse = {
 export type {
     TUserRequest,
     TUserResponse,
-    TUserLogin
+    TUserLogin,
+    TUserUpdate
 }
