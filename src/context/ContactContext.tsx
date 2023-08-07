@@ -34,7 +34,7 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
     const [deletingContact, setDeletingContact] = useState<number | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const { user, setUser } = useContext(UserContext)
+    const {  setUser } = useContext(UserContext)
     
     useEffect(() => { 
         const id = localStorage.getItem('@id')
@@ -49,7 +49,7 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
                 },
               });
               setUser(response.data)
-              user
+  
               setContacts(response.data.contacts);
             } catch (error) {
               console.log(error);
