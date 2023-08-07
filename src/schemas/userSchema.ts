@@ -36,19 +36,8 @@ const schemaLogin = yup
   })
   .required();
 
-// const userReadResponse = userResponse.extend({
-//   contacts: contactArray,
-// });
-
-// const userUpdateRequest = userRequest.deepPartial();
-
-// const userArrayResponse = z.array(userResponse);
-
 export {
   schemaRegister,
   schemaLogin,
 
-  //   userReadResponse,
-  //   userArrayResponse,
-  //   userUpdateRequest,
 };

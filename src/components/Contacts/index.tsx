@@ -10,7 +10,7 @@ const ListContacts = () => {
 
     return(
         <StyledListContacts>
-            {contact!.map((cont: TContact) => {
+            {contact.map((cont: TContact) => {
                 return <CardContact key={cont.id} cont={cont}/>
             })}
         </StyledListContacts>

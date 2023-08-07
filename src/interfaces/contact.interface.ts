@@ -13,4 +13,4 @@ export type TContactRequest = Omit<TContact, "id" | "createdAt"> & {
 
 export type TContactForm = Omit<TContact, "id" | "createdAt">;
 
-export type TContactUpdate = Partial<TContactForm>
+export type TContactUpdate = Partial<TContactForm > 

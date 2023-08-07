@@ -33,7 +33,7 @@ const FormCreateTech = () => {
     const submitNewContact: SubmitHandler<TContactForm>= (data) => {
         const contact = {
             ...data,
-            userId: +(id!)
+            userId: +(id)
         } 
         contactsCreate(contact)
         reset()

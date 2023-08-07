@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable no-prototype-builtins */
+
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-floating-promises */
+
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useContext } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
@@ -41,8 +41,8 @@ const UpdateContactForm = () => {
         }
         const result: TContactUpdate = {}
         for (const key in oldValues) {      
-            if (data[key] !== oldValues[key] ) {              
-                result[key] = data[key]
+            if(data[key] !== oldValues[key]) {              
+                result[key] = data[key] 
            }
         }
         if(Object.keys(result).length === 0){
@@ -53,7 +53,7 @@ const UpdateContactForm = () => {
             setEditingContact(null);
 
         }else{
-            contactsUpdate(result, editingContact!.id)
+            contactsUpdate(result, editingContact.id)
         }
          
     }
@@ -98,7 +98,7 @@ const UpdateContactForm = () => {
 
                 <div className="boxButton">
                     <Button className="btnEditingTech" type="submit">{loading ? <img className="loading" src={spinner}/> : "Salvar"}</Button>
-                    <Button className="btnRemoveTech" type="button" onClick={() => setDeletingContact(editingContact!.id)}>Deletar</Button>
+                    <Button className="btnRemoveTech" type="button" onClick={() => setDeletingContact(editingContact.id)}>Deletar</Button>
                 </div>
           </div>
 

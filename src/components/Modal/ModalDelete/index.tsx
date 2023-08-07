@@ -9,7 +9,7 @@ const ModalDelete = () => {
     useContext(ContactContext);
 
   const remove = () => {
-    contactsDelete(deletingContact!);
+    contactsDelete(deletingContact);
     setDeletingContact(null);
     setEditingContact(null);
   };

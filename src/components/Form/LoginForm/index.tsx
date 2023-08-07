@@ -13,7 +13,6 @@ import Button from "../../../styles/button"
 import StyledLoginForm from "./loginForm"
 
 const LoginForm = () => {
-
     const { register, handleSubmit, reset, formState: {errors}} = useForm({
         resolver: yupResolver(schemaLogin)
 
@@ -21,8 +20,7 @@ const LoginForm = () => {
    
     const { userLogin } = useContext(UserContext)
 
-    const submit:SubmitHandler<TUserLogin> = (data) => {
-       
+    const submit:SubmitHandler<TUserLogin> = (data) => {     
         userLogin(data)
         reset()
     }

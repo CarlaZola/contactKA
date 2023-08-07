@@ -40,7 +40,7 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
         const id = localStorage.getItem('@id')
         if (id) {
         const token = localStorage.getItem("@token");
-        const instedToken = token!.slice(1, -1);
+        const instedToken = token.slice(1, -1);
           const getContacts = async () => {
             try {
               const response = await api.get<TUserResponse>(`client/${id}`, {
@@ -64,7 +64,7 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
     const contactsCreate = async (dataContact: TContactRequest) => {
       setLoading(true)
       
-      const instedToken = token!.slice(1, -1);
+      const instedToken = token.slice(1, -1);
       try {
         const response = await api.post("contact", dataContact, {
           headers: {
@@ -93,7 +93,7 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
   
     const contactsDelete = async (idContact: number) => {
       const token = localStorage.getItem("@token");
-      const instedToken = token!.slice(1, -1);
+      const instedToken = token.slice(1, -1);
       try {
         const response = await api.delete(`contact/${idContact}`, {
           headers: {
@@ -122,7 +122,7 @@ export const ContactProvider = ({ children }: IDefaultProviderProps) => {
     const contactsUpdate = async (dataContact: TContactUpdate, idContact: number) => {
       setLoading(true);
       const token = localStorage.getItem("@token");    
-      const instedToken = token!.slice(1, -1);
+      const instedToken = token.slice(1, -1);
       try {
         const response = await api.patch<TContact>(`contact/${idContact}`, dataContact, {
           headers: {

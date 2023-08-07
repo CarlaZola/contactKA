@@ -60,9 +60,9 @@ export const UserProvider = ({children}: IDefaultProviderProps) => {
             const userLoad = async() => {
                 
                 try{
-                    const response = await api.get<TUserResponse>(`client/${id!}`, {
+                    const response = await api.get<TUserResponse>(`client/${id}`, {
                         headers: {
-                            Authorization: `Bearer ${instedToken!}`
+                            Authorization: `Bearer ${instedToken}`
                         }
                     
                     })
