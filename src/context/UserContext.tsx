@@ -107,7 +107,7 @@ export const UserProvider = ({children}: IDefaultProviderProps) => {
                 }, 1300);
         }catch(error){     
             if(axios.isAxiosError(error)){
-                toast.error(error.message, {
+                toast.error("Nome ou email já registrados na base de dados!", {
                     theme: `colored`,
                     autoClose: 500,
                     position: "top-right",
